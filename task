@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp8
+{
+    class Program
+    {
+        static void Swap(ref int e1, ref int e2)
+        {
+            var temp = e1;
+            e1 = e2;
+            e2 = temp;
+        }
+
+        static int[] ShakerSort(int[] array)
+        {
+            for (var i = 0; i < array.Length / 2; i++)
+            {
+                var swapFlag = false;
+                for (var j = i; j < array.Length - i - 1; j++)
+                {
+                    if (array[j] > array[j + 1])
+                    {
+                        Swap(ref array[j], ref array[j + 1]);
+                        swapFlag = true;
+                    }
+                }
+
+                for (var j = array.Length - 2 - i; j > i; j--)
+                {
+                    if (array[j - 1] > array[j])
+                    {
+                        Swap(ref array[j - 1], ref array[j]);
+                        swapFlag = true;
+                    }
+                }
+                try
+                {
+                    if (!swapFlag)
+                    {
+                        break;
+                    }
+                }
+                finally
+                {
+
+                }
+            }
+
+            return array;
+        }
+        static void Main(string[] args)
+        {
+            int[] array = new int[7];
+            Random rand = new Random();
+            try
+            {
+                for (int x = 0; x < array.Length; x++)
+                {
+                    array[x] = rand.Next(20);
+                    Console.WriteLine("Element value: " + x + " = " + array[x]);
+                }
+                int n = array.Length;
+                int i;
+                Console.WriteLine("Shaker Sort");
+                Console.Write("Initial array is: ");
+                for (i = 0; i < n; i++)
+                {
+                    Console.Write(array[i] + " ");
+                }
+                ShakerSort(array);
+                Console.Write("\nSorted Array is: ");
+                for (i = 0; i < n; i++)
+                {
+                    Console.Write(array[i] + " ");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Возникла ошибка");
+            }
+            finally { }
+            Console.ReadKey();
+        }
+    }
+}
